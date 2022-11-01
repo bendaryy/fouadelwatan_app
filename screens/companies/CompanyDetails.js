@@ -6,6 +6,8 @@ import {
   ActivityIndicator,
   ScrollView,
   StyleSheet,
+  Linking,
+  Pressable,
 } from "react-native";
 import {
   Table,
@@ -18,54 +20,88 @@ import {
 } from "react-native-table-component";
 
 const CompanyDetails = ({ route, navigation }) => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [term, setTerm] = useState([]);
-  const [filterData, setFilterData] = useState([]);
-  const [masterData, setMasterData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const [search, setSearch] = useState();
 
-    const { companyName, companyId } = route.params;
-    
+  const {
+    name,
+    archive,
+    companyId,
+    code,
+    TxtYear,
+    Kian,
+    AddrCo,
+    BetakaDriba,
+    SegelTogary,
+    MamoriaDriba,
+    NameOner,
+    PhoneOner,
+    EmailOner,
+    notee,
+  } = route.params;
 
-     const tableHead = [filterData.code, "كود الشركة"];
-     const tableData = [
-       [filterData.name, "إسم الشركة"],
-       [filterData.TxtYear, "نشاط الشركة"],
-       [filterData.Kian, "كيان الشركة"],
-       [filterData.AddrCo, "عنوان الشركة"],
-       [filterData.BetakaDriba, "رقم البطاقة الضريبية"],
-       [filterData.SegelTogary, "رقم السجل التجارى"],
-       [filterData.MamoriaDriba, "المأمورية التابعة لها"],
-       [filterData.NameOner, "مالك الشركة"],
-       [filterData.PhoneOner, "المدير المالى"],
-       [filterData.EmailOner, "إيميل الشركة"],
-       [filterData.notee, "ملاحظات"],
-     ];
+  const tableHead = [code, "كود الشركة"];
+  const tableData = [
+    [name, "إسم الشركة"],
+    [
+      <Pressable
+        style={{ color: "white", textAlign: "center", backgroundColor: "blue" }}
+      >
+        <Text
+          onPress={archive != null ?() => Linking.openURL(archive):()=>alert('لا يوجد أرشيف لهذه الشركة حالياً')}
+          style={{
+            textAlign: "center",
+            color: "white",
+            margin: "auto",
+            alignContent: "center",
+            alignItems: "center",
+            marginLeft: 15,
+            padding: 30,
+          }}
+        >
+         
+          {archive != null ? "الذهاب إلى الأرشيف الإلكترونى " : "لا يوجد ارشيف لهذه الشركة حالياً"}
+        </Text>
+      </Pressable>,
+      " الأرشيف الإلكترونى",
+    ],
 
-  useEffect(() => {
-    fetchCompany();
-    return () => {};
-  }, []);
+    [TxtYear, "نشاط الشركة"],
+    [Kian, "كيان الشركة"],
+    [AddrCo, "عنوان الشركة"],
+    [BetakaDriba, "رقم البطاقة الضريبية"],
+    [SegelTogary, "رقم السجل التجارى"],
+    [MamoriaDriba, "المأمورية التابعة لها"],
+    [NameOner, "مالك الشركة"],
+    [PhoneOner, "المدير المالى"],
+    [EmailOner, "إيميل الشركة"],
+    // [notee, "ملاحظات"],
+  ];
+  const notes = [[notee, "ملاحظات"]];
 
-  const fetchCompany = () => {
-    const apiUrl = `https://fouadelwatan.net/api/company/${companyId}`;
-    // const apiUrl = "https://jsonplaceholder.typicode.com/posts";
-    fetch(apiUrl, {
-      headers: {
-        AppKey: "31fdhg2334xzewrgfhfdjhrg",
-      },
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setFilterData(responseJson.data);
-        setMasterData(responseJson.data);
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  //   useEffect(() => {
+  //     fetchCompany();
+  //     return () => {};
+  //   }, []);
+
+  //   const fetchCompany = () => {
+  //     const apiUrl = `https://fouadelwatan.net/api/company/${companyId}`;
+  //     // const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+  //     fetch(apiUrl, {
+  //       headers: {
+  //         AppKey: "31fdhg2334xzewrgfhfdjhrg",
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((responseJson) => {
+  //         setFilterData(responseJson.data);
+  //         setMasterData(responseJson.data);
+  //         setLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   };
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -89,6 +125,8 @@ const CompanyDetails = ({ route, navigation }) => {
               style={styles.head}
               textStyle={styles.text}
             />
+            {/* <Row data={notes} style={styles.head} textStyle={styles.text} /> */}
+            <Rows data={notes} style={styles.note} textStyle={styles.text} />
           </Table>
         </ScrollView>
       </View>
@@ -104,12 +142,18 @@ const styles = StyleSheet.create({
     color: "white",
   },
   head: {
-    height: 80,
+    height: 100,
     backgroundColor: "#00204C",
     textAlign: "center",
     color: "white",
   },
   text: { color: "white", textAlign: "center" },
+  note: {
+    height: 600,
+    backgroundColor: "#00204C",
+    textAlign: "center",
+    color: "white",
+  },
 });
 
 export default CompanyDetails;

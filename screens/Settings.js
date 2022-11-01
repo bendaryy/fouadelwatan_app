@@ -8,7 +8,7 @@ export const  SettingsScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       {/* <Text>setting screen</Text> */}
-      <Text>إسم السمتخدم : {user.name}</Text>
+      <Text>إسم المستخدم : {user.name}</Text>
       <Text>البريد الإلكترونى : {user.email}</Text>
       <Text>الرقم التعريفى للمستخدم : {user.id}</Text>
       {/* <Text>user name : {user.name}</Text> */}

@@ -12,7 +12,8 @@ import {
   Platform,
   Pressable,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  TouchableOpacity
 } from "react-native";
 import Logo from "../assets/logo2.png";
 
@@ -59,9 +60,9 @@ function LoginScreen({ navigation }) {
         title="Login"
         onPress={() => login(email, password)}
       /> */}
-        <Pressable style={styles.button} onPress={() => login(email, password)}>
+        <TouchableOpacity style={styles.button} onPress={() => login(email, password)}>
           <Text style={styles.text}>Login</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
   );

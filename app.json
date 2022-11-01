@@ -2,25 +2,29 @@
   "expo": {
     "name": "Fouad El-Watan",
     "slug": "fouadelwatan",
-    "version": "1.0.1",
+    "version": "1.0.5",
     "orientation": "portrait",
-    "icon": "./assets/logo.jpg",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo.jpg",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#00204C"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.bendary.fouadelwatan",
-      "buildNumber": "2"
+      "buildNumber": "6"
     },
     "android": {
+      "package": "com.bendary.fouadelwatan",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +32,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6c5d6a2f-f52c-48c3-ba41-c571bbf20154"
+      }
     }
   }
 }

@@ -5,11 +5,12 @@ import { Button, Text, View } from "react-native";
 import axios from "axios";
 import Roles from "../screens/Roles";
 import { DashboardScreen } from "../screens/Dashboard";
-import Ekrar from "../screens/Ekrarat/Ekrar";
-import EkrarDetails from "../screens/Ekrarat/EkrarDetails";
+import Ekrar from "../screens/Tax/Ekrar";
+import EkrarDetails from "../screens/Tax/EkrarDetails";
 import { SettingsScreen } from "../screens/Settings";
-import Companies from "../screens/companies/Companies";
+import WatanCompanies from "../screens/companies/WatanCompanies";
 import CompanyDetails from "../screens/companies/CompanyDetails";
+import TabNavigator from "../screens/navigation/TabNavigator";
 
 axios.defaults.baseURL = "https://fouadelwatan.net/";
 const Stack = createNativeStackNavigator();
@@ -24,7 +25,7 @@ export const AppStack = () => {
       <Stack.Screen
         name="Dashboard"
         options={{ title: "الصفحة الرئيسية" }}
-        component={DashboardScreen}
+        component={Dashboard}
       />
       <Stack.Screen
         name="Settings"
@@ -42,14 +43,19 @@ export const AppStack = () => {
         component={EkrarDetails}
       />
       <Stack.Screen
-        name="companies"
+        name="WatanCompanies"
         options={{ title: "عرض جميع الشركات" }}
-        component={Companies}
+        component={WatanCompanies}
       />
       <Stack.Screen
         name="companyDetails"
         options={{ title: "عرض تفاصيــل الشركة" }}
         component={CompanyDetails}
+      />
+      <Stack.Screen
+        name="tabNavigator"
+        options={{ title: "موقف الميزانيات و الإقرارات" }}
+        component={TabNavigator}
       />
       <Stack.Screen name="Roles" component={Roles} />
     </Stack.Navigator>

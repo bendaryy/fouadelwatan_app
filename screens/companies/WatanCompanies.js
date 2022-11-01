@@ -11,16 +11,19 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+// import Search from "./Search";
 
 // const placeholderImage = require("../assets/placeholder.png");
 
-function Ekrar({ navigation }) {
+function WatanCompanies({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [term, setTerm] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [masterData, setMasterData] = useState([]);
   const [search, setSearch] = useState();
+  const [number, setNumber] = useState();
+
 
   useEffect(() => {
     let unmounted = false;
@@ -31,7 +34,8 @@ function Ekrar({ navigation }) {
   }, []);
 
   const fetchPosts = () => {
-    const apiUrl = "https://fouadelwatan.net/api/ekrarat";
+    const apiUrl = "https://fouadelwatan.net/api/company";
+    // const apiUrl = "https://jsonplaceholder.typicode.com/posts";
     fetch(apiUrl, {
       headers: {
         AppKey: "31fdhg2334xzewrgfhfdjhrg",
@@ -41,6 +45,7 @@ function Ekrar({ navigation }) {
       .then((responseJson) => {
         setFilterData(responseJson.data);
         setMasterData(responseJson.data);
+        setNumber(Object.keys(responseJson.data).length);
         setLoading(false);
       })
       .catch((error) => {
@@ -48,10 +53,12 @@ function Ekrar({ navigation }) {
       });
   };
 
+ 
+
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
-        const itemData = item.company.name ? item.company.name : "";
+        const itemData = item.name ? item.name : "";
         const textData = text;
         return itemData.indexOf(textData) > -1;
       });
@@ -66,7 +73,12 @@ function Ekrar({ navigation }) {
   const ItemSeparatorView = () => {
     return (
       <View
-        style={{ height: 0.5, width: "100%", backgroundColor: "#c8c8c8" }}
+        style={{
+          height: 1,
+          padding: 1,
+          width: "100%",
+          backgroundColor: "#c8c8c8",
+        }}
       />
     );
   };
@@ -79,7 +91,10 @@ function Ekrar({ navigation }) {
     );
   } else {
     return (
-      <View style={styles.main}>
+     <>
+        <View style={styles.ViewStatus}>
+          <Text style={styles.textStatus}> عدد الشركات : {number}</Text>
+        </View>
         <TextInput
           style={styles.TextInput}
           value={search}
@@ -93,20 +108,34 @@ function Ekrar({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("EkrarDetails", {
-                  ekrarId: item.id,
+                navigation.navigate("companyDetails", {
+                  name: item.name,
+                  archive:item.googledrive,
+                  companyId: item.id,
+                  TxtYear: item.TxtYear,
+                  Kian: item.Kian,
+                  AddrCo: item.AddrCo,
+                  TxtYear: item.TxtYear,
+                  SegelTogary: item.SegelTogary,
+                  BetakaDriba: item.BetakaDriba,
+                  MamoriaDriba: item.MamoriaDriba,
+                  code: item.code,
+                  NameOner: item.NameOner,
+                  PhoneOner: item.PhoneOner,
+                  EmailOner: item.EmailOner,
+                  notee: item.notee,
                 });
               }}
               style={styles.itemStyle}
             >
-              <Text style={styles.text}>كود الشركة :{item.company.code}</Text>
-              <Text style={styles.text}>إسم الشركة :{item.company.name}</Text>
-              <Text style={styles.text}>حالة الإقرار : {item.status}</Text>
+              <Text style={styles.text}>
+                {item.code} / {item.name}
+              </Text>
             </TouchableOpacity>
           )}
         />
         <StatusBar style="auto" />
-      </View>
+      </>
     );
   }
 }
@@ -142,6 +171,19 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
   },
+  ViewStatus: {
+    backgroundColor: "#00204C",
+    width: "100%",
+  },
+  textStatus: {
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
+    padding: 2,
+    margin: 5,
+    color: "white",
+  },
 });
 
-export default Ekrar;
+export default WatanCompanies;

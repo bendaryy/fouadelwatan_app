@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthProvider";
 import { AppStack } from "./AppStack";
 import * as SecureStore from "expo-secure-store";
 import { AuthStack } from "./AuthStack";
+import Dashboard from "../screens/Dashboard";
 
 export default function Routes() {
   const { user, setUser, login, logout } = useContext(AuthContext);
@@ -34,7 +35,7 @@ export default function Routes() {
 
   return (
     <NavigationContainer>
-      {user ? <AppStack /> : <AuthStack />}
+      {user ? <Dashboard /> : <AuthStack />}
     </NavigationContainer>
   );
 }

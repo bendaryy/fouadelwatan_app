@@ -9,18 +9,23 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
+
 // import Search from "./Search";
 
 // const placeholderImage = require("../assets/placeholder.png");
 
-function Companies({ navigation }) {
+function AuditFileNew({ route, navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [term, setTerm] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [masterData, setMasterData] = useState([]);
   const [search, setSearch] = useState();
+  const [number, setNumber] = useState();
+
+  const { season, month, operator } = route.params;
 
   useEffect(() => {
     let unmounted = false;
@@ -31,8 +36,8 @@ function Companies({ navigation }) {
   }, []);
 
   const fetchPosts = () => {
-    const apiUrl = "https://fouadelwatan.net/api/company";
-    // const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+    const apiUrl = `https://fouadelwatan.net/api/AuditFile/${season}/${month}/${operator}`;
+
     fetch(apiUrl, {
       headers: {
         AppKey: "31fdhg2334xzewrgfhfdjhrg",
@@ -42,6 +47,7 @@ function Companies({ navigation }) {
       .then((responseJson) => {
         setFilterData(responseJson.data);
         setMasterData(responseJson.data);
+        setNumber(Object.keys(responseJson.data).length);
         setLoading(false);
       })
       .catch((error) => {
@@ -52,7 +58,7 @@ function Companies({ navigation }) {
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
-        const itemData = item.name ? item.name : "";
+        const itemData = item.company.name ? item.company.name : "";
         const textData = text;
         return itemData.indexOf(textData) > -1;
       });
@@ -85,7 +91,19 @@ function Companies({ navigation }) {
     );
   } else {
     return (
-      <View style={styles.main}>
+      <>
+        <View style={styles.ViewStatus}>
+          <Text style={styles.textStatus}>سنة ملفات المراجعة : {season}</Text>
+          <Text style={styles.textStatus}>شهر ملفات المراجعة : {month}</Text>
+          {/* <Text style={styles.textStatus}>حالة الميزانية : {status}</Text> */}
+          <Text style={styles.textStatus}>
+            {" "}
+            {operator == "!="? "الملفات موجودة بالأرشيف": "الملفات غير موجودة بالأرشيف"}
+            : {number}
+          </Text>
+          
+        </View>
+
         <TextInput
           style={styles.TextInput}
           value={search}
@@ -99,21 +117,28 @@ function Companies({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("companyDetails", {
-                  companyName: item.name,
-                  companyId: item.id,
+                navigation.navigate("عرض تفصيلى للميزانية", {
+                  companyName: item.company.name,
+                  code: item.company.code,
+                  companyId: item.company.id,
+                  season: item.season,
+                  month: item.month,
+                  auditor: item.auditor,
+                  mezanya_copies: item.mezanya_copies,
+                  auditor_manager: item.auditor_manager,
+                  status: item.mezanya_status,
+                  type: item.mezanya_type,
+                  statement: item.statement,
                 });
               }}
               style={styles.itemStyle}
             >
-              <Text style={styles.text}>
-                {item.code} / {item.name}
-              </Text>
+              <Text style={styles.text}>{item.company.name}</Text>
             </TouchableOpacity>
           )}
         />
         <StatusBar style="auto" />
-      </View>
+      </>
     );
   }
 }
@@ -121,8 +146,8 @@ function Companies({ navigation }) {
 const styles = StyleSheet.create({
   main: {
     textAlign: "center",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     backgroundColor: "white",
   },
   carLogo: {
@@ -130,7 +155,7 @@ const styles = StyleSheet.create({
     width: 100,
   },
   itemStyle: {
-    padding: 30,
+    padding: 50,
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -149,6 +174,19 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
   },
+  textStatus: {
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
+    padding: 2,
+    margin: 5,
+    color: "white",
+  },
+  ViewStatus: {
+    backgroundColor: "#00204C",
+    width: "100%",
+  },
 });
 
-export default Companies;
+export default AuditFileNew;
