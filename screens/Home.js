@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { View, Button, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 
 const Home = ({ navigation }) => {
   return (
@@ -26,6 +33,20 @@ const Home = ({ navigation }) => {
           onPress={() => navigation.navigate("قسم المراجعة")} // We added an onPress event which would navigate to the About screen
         >
           <Text style={styles.text}>قسم المراجعة</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
+          title="الفواتير الإلكترونية"
+          onPress={() => navigation.navigate("الفواتير الإلكترونية")} // We added an onPress event which would navigate to the About screen
+        >
+          <Text style={styles.text}>الفواتير الإلكترونية</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
+          title="الشئون القانونية"
+          onPress={() => navigation.navigate("الشئون القانونية")} // We added an onPress event which would navigate to the About screen
+        >
+          <Text style={styles.text}>الشئون القانونية</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

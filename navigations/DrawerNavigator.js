@@ -9,6 +9,10 @@ import CompaniesTabs from "../screens/Tabs/Companies";
 import TabNavigator from "./TabNavigator";
 import TaxTabs from "../screens/Tabs/Tax";
 import AuditTabs from "../screens/Tabs/Audit";
+import Einvoicesent from "../screens/Einvoice/Einvoicesent";
+import LegalSituation from "../screens/legal/LegalSituation";
+import LegalHome from "../screens/legal/LegalHome";
+import LegalTabs from "../screens/Tabs/LegalTabs";
 // import WatanCompanies from "../screens/companies/WatanCompanies";
 
 const Drawer = createDrawerNavigator();
@@ -28,6 +32,16 @@ const DrawerNavigator = () => {
         options={{ headerTitle: "" }}
         name="قسم المراجعة"
         component={AuditTabs}
+      />
+      <Drawer.Screen
+        options={{ headerTitle: "" }}
+        name="الفواتير الإلكترونية"
+        component={Einvoicesent}
+      />
+      <Drawer.Screen
+        options={{ headerTitle: "" }}
+        name="الشئون القانونية"
+        component={LegalTabs}
       />
     </Drawer.Navigator>
   );

@@ -23,6 +23,9 @@ import AuditFileSeason from "../screens/Audit/AuditFileSeason";
 import AuditFilesMonth from "../screens/Audit/AuditFilesMonth";
 import AuditFileStatus from "../screens/Audit/AuditFilesStatus";
 import AuditFileNew from "../screens/Audit/AuditFilesNew";
+import Einvoicesent from "../screens/Einvoice/Einvoicesent";
+import LegalSituation from "../screens/legal/LegalSituation";
+import LegalHome from "../screens/legal/LegalHome";
 
 const Stack = createNativeStackNavigator();
 
@@ -116,6 +119,13 @@ const AuditFiles = () => {
   </Stack.Navigator>;
 };
 
+const Einvoice = () => {
+   <Stack.Navigator screenOptions={screenOptionStyle}>
+     <Stack.Screen name="الفواتير الإلكترونية" component={Einvoicesent} />
+   </Stack.Navigator>;
+}
+
+
 export {
   MainStackNavigator,
   ContactStackNavigator,
@@ -123,4 +133,5 @@ export {
   Tax,
   Audit,
   AuditFiles,
+  Einvoice,
 };
