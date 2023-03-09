@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         setUser,
         error,
         login: (email, password) => {
-          // axios.defaults.headers.common["AppKey"] = '';
+         axios.defaults.headers.common["AppKey"] = "31fdhg2334xzewrgfhfdjhrg";
           axios
             .post("/api/login", {
               email,
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
                 token: response.data.token,
                 name: response.data.user.name,
               };
-              console.log(userResponse)
+              console.log(userResponse);
               setUser(userResponse);
               setError(null);
               SecureStore.setItemAsync("user", JSON.stringify(userResponse));
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
             .catch((error) => {
               const key = Object.keys(error.response.data.errors)[0];
               setError(error.response.data.errors[key][0]);
-              console.log(error.response.data.errors)
+              console.log(error.response.data.errors);
             });
         },
         logout: () => {
@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${user.token}`;
+          axios.defaults.headers.common["AppKey"] = `31fdhg2334xzewrgfhfdjhrg`;
           axios
             .post(`api/logout/${tokenId}`)
             .then((response) => {
@@ -61,7 +62,7 @@ export const AuthProvider = ({ children }) => {
         },
       }}
     >
-      { children }
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -130,9 +130,8 @@ function Fahs({ navigation }) {
                 {item.company.name}
               </Text>
               <Text style={styles.text}>
-                {" "}
-                <Text style={styles.title}> نوع الضريبة</Text> :{" "}
-                {item.dariba_type}
+              
+                <Text style={styles.title}> نوع الضريبة</Text>{item.dariba_type}
               </Text>
               {/* <Text style={styles.text}>  <Text style={styles.title}>متطلبات الفحص</Text>  : {item.fahs_papers}</Text> */}
               {/* <Text style={styles.text}>  <Text style={styles.title}>المسئول</Text>  : {item.data_entry}</Text> */}
