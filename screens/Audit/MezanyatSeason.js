@@ -20,6 +20,10 @@ function MezanyatSeason({ route, navigation }) {
       id: 2,
       season: 2022,
     },
+    {
+      id: 2,
+      season: 2023,
+    },
   ];
   return (
     <SafeAreaView  style={{

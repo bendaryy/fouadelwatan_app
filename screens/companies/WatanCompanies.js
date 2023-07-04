@@ -59,8 +59,11 @@ function WatanCompanies({ navigation }) {
     if (text) {
       const newData = masterData.filter((item) => {
         const itemData = item.name ? item.name : "";
+        const itemCode = item.code ? item.code : "";
         const textData = text;
-        return itemData.indexOf(textData) > -1;
+        return (
+          itemData.indexOf(textData) > -1 || itemCode.indexOf(textData) > -1
+        );
       });
       setFilterData(newData);
       setSearch(text);
@@ -91,14 +94,14 @@ function WatanCompanies({ navigation }) {
     );
   } else {
     return (
-     <>
+      <>
         <View style={styles.ViewStatus}>
           <Text style={styles.textStatus}> عدد الشركات : {number}</Text>
         </View>
         <TextInput
           style={styles.TextInput}
           value={search}
-          placeholder="البحث بإسم الشركة"
+          placeholder="البحث بإسم الشركة او كود الشركة"
           onChangeText={(text) => searchFilter(text)}
         />
         <FlatList
@@ -110,7 +113,7 @@ function WatanCompanies({ navigation }) {
               onPress={() => {
                 navigation.navigate("companyDetails", {
                   name: item.name,
-                  archive:item.googledrive,
+                  archive: item.googledrive,
                   companyId: item.id,
                   TxtYear: item.TxtYear,
                   Kian: item.Kian,

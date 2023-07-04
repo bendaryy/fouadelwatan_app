@@ -11,6 +11,7 @@ import MezanyatSeason from "../Audit/MezanyatSeason";
 import MezanyatType from "../Audit/MezanyaType";
 import LegalHome from "../legal/LegalHome";
 import LegalSituation from "../legal/LegalSituation";
+import Whatsapp from "../legal/Whatsapp";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,11 +31,23 @@ const LegalTabs = () => {
           headerShown: false,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="متابعة الشئون القانونية"
         component={LegalSituation}
         options={{
           tabBarLabel: "متابعة الشئون القانونية",
+          tabBarIcon: () => (
+            <Ionicons name="location" size={25} color="#00204C" />
+          ),
+          headerShown: false,
+        }}
+      /> */}
+
+      <Tab.Screen
+        name="متابعة الشئون القانونية (واتساب)"
+        component={Whatsapp}
+        options={{
+          tabBarLabel: "متابعة الشئون القانونية (واتساب)",
           tabBarIcon: () => (
             <Ionicons name="location" size={25} color="#00204C" />
           ),

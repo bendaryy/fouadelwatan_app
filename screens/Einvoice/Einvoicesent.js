@@ -57,9 +57,12 @@ function Einvoicesent({ navigation }) {
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
-        const itemData = item.receiverName ? item.receiverName : "";
+        const itemData = item.issuerName ? item.issuerName : "";
+        const itemData2 = item.receiverName ? item.receiverName : "";
         const textData = text;
-        return itemData.indexOf(textData) > -1;
+        return (
+          itemData.indexOf(textData) > -1 || itemData2.indexOf(textData) > -1
+        );
       });
       setFilterData(newData);
       setSearch(text);
@@ -117,7 +120,9 @@ function Einvoicesent({ navigation }) {
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => Linking.openURL(item.publicUrl)}
+              onPress={() =>
+                Linking.openURL("https://fouadelwatan.net/showPdf/" + item.uuid)
+              }
               style={[
                 item.issuerId === "410973742"
                   ? styles.itemStyle
@@ -141,7 +146,9 @@ function Einvoicesent({ navigation }) {
                   <Text>تم إرسالها و جارى مراجعتها </Text>
                 ) : item.status == "Valid" ? (
                   <Text>صحيحة </Text>
-                ) : item.status=="Invalid"?<Text>غير صحيحة</Text>: item.status == "Cancelled" ? (
+                ) : item.status == "Invalid" ? (
+                  <Text>غير صحيحة</Text>
+                ) : item.status == "Cancelled" ? (
                   <Text>تم إلغائها</Text>
                 ) : item.status == "Rejected" ? (
                   <Text>تم رفضها</Text>
@@ -156,8 +163,8 @@ function Einvoicesent({ navigation }) {
                   fontWeight: "bold",
                   fontSize: 13,
                 }}
-                  >
-                      المبلغ الإجمالى : {item.total}
+              >
+                المبلغ الإجمالى : {item.total}
               </Text>
             </TouchableOpacity>
           )}

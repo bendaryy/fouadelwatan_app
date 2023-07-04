@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
+import moment from 'moment';
 import {
   Text,
   View,
@@ -15,7 +16,7 @@ import {
 
 // const placeholderImage = require("../assets/placeholder.png");
 
-function LegalSituation({ navigation }) {
+function Whatsapp({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [term, setTerm] = useState([]);
@@ -23,7 +24,7 @@ function LegalSituation({ navigation }) {
   const [masterData, setMasterData] = useState([]);
   const [search, setSearch] = useState();
   const [number, setNumber] = useState();
-
+ 
   useEffect(() => {
     let unmounted = false;
     fetchPosts();
@@ -33,7 +34,7 @@ function LegalSituation({ navigation }) {
   }, []);
 
   const fetchPosts = () => {
-    const apiUrl = "https://fouadelwatan.net/api/legalsit";
+    const apiUrl = "https://fouadelwatan.net/api/legalwhatsapp";
     // const apiUrl = "https://jsonplaceholder.typicode.com/posts";
     fetch(apiUrl, {
       headers: {
@@ -55,9 +56,15 @@ function LegalSituation({ navigation }) {
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
-        const itemData = item.company.name ? item.company.name : "";
+        const itemData = item.company_name ? item.company_name : "";
+        const personName = item.person_name ? item.person_name : "";
+        const personNumber = item.mobile_number ? item.mobile_number : "";
         const textData = text;
-        return itemData.indexOf(textData) > -1;
+        return (
+          itemData.indexOf(textData) > -1 ||
+          personName.indexOf(textData) > -1 ||
+          personNumber.indexOf(textData) > -1
+        );
       });
       setFilterData(newData);
       setSearch(text);
@@ -90,15 +97,12 @@ function LegalSituation({ navigation }) {
     return (
       <>
         <View style={styles.ViewStatus}>
-          <Text style={styles.textStatus}>
-            {" "}
-            عدد التحركات (العمليات) : {number}
-          </Text>
+          <Text style={styles.textStatus}> عدد الطلبات : {number}</Text>
         </View>
         <TextInput
           style={styles.TextInput}
           value={search}
-          placeholder="البحث بإسم الشركة"
+          placeholder="البحث بإسم الشركة او إسم الشخص او رقم تليفون الشخص"
           onChangeText={(text) => searchFilter(text)}
         />
         <FlatList
@@ -106,39 +110,66 @@ function LegalSituation({ navigation }) {
           keyExtractor={(item) => item.id}
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={({ item }) => (
-            <TouchableOpacity
-           
-              style={styles.itemStyle}
-            >
-            
-
+            <TouchableOpacity style={styles.itemStyle}>
+              <Text style={styles.text}>
+                <Text style={styles.title}> كود الطلب : </Text>
+                {item.service_code}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}> حالة الطلب : </Text>
+                {item.status}
+              </Text>
               <Text style={styles.text}>
                 <Text style={styles.title}> كود الشركة : </Text>
-                {item.company.code}
+                {item.company_code}
               </Text>
               <Text style={styles.text}>
                 <Text style={styles.title}> إسم الشركة : </Text>
-                {item.company.name}
+                {item.company_name}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}>اسم الشخص : </Text>
+                {item.person_name}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}>رقم تيلفون الشخص: </Text>
+                {item.mobile_number}
               </Text>
               <Text style={styles.text}>
                 <Text style={styles.title}> نوع الخدمة : </Text>
                 {item.legal_service}
               </Text>
               <Text style={styles.text}>
-                <Text style={styles.title}> وصف العمل : </Text>
-                {item.job_desc}
+                <Text style={styles.title}> تاريخ رسالة الواتساب : </Text>
+                {item.message_date}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}> وصف رسالة الواتساب : </Text>
+                {item.message}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}> ملاحظات : </Text>
+                {item.notes}
               </Text>
               <Text style={styles.text}>
                 <Text style={styles.title}>تاريخ بداية العمل : </Text>
                 {item.start_date}
               </Text>
               <Text style={styles.text}>
-                <Text style={styles.title}> التاريخ المتوقع لانتهاء العمل : </Text>
+                <Text style={styles.title}>تاريخ نهاية العمل :</Text>
                 {item.end_date}
               </Text>
               <Text style={styles.text}>
-                <Text style={styles.title}> مدخل البيان : </Text>
-                {item.data_entry}
+                <Text style={styles.title}>تاريخ كتابة الموقف :</Text>
+                {moment(item.created_at).format("Y-M-D")}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}>تاريخ تحديث الموقف :</Text>
+                {moment(item.updated_at).format("Y-M-D")}
+              </Text>
+              <Text style={styles.text}>
+                <Text style={styles.title}>توقيت تحديث الموقف :</Text>
+                {moment(item.updated_at).format("LTS")}
               </Text>
             </TouchableOpacity>
           )}
@@ -163,14 +194,14 @@ const styles = StyleSheet.create({
   itemStyle: {
     paddingTop: 30,
     paddingBottom: 30,
-    paddingRight:3,
-    paddingLeft:3,
+    paddingRight: 3,
+    paddingLeft: 3,
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#00204C",
     color: "white",
-},
+  },
   TextInput: {
     height: 40,
     borderWidth: 1,
@@ -179,8 +210,8 @@ const styles = StyleSheet.create({
     borderColor: "black",
     width: "95%",
     textAlign: "center",
-},
-text: {
+  },
+  text: {
     color: "white",
     textAlign: "right",
     padding: 15,
@@ -188,7 +219,7 @@ text: {
     borderColor: "white",
     margin: 5,
     fontSize: 13,
-    width:"100%"
+    width: "100%",
   },
   ViewStatus: {
     backgroundColor: "#00204C",
@@ -209,4 +240,4 @@ text: {
   },
 });
 
-export default LegalSituation;
+export default Whatsapp;

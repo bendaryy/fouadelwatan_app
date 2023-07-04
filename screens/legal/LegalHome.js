@@ -11,18 +11,29 @@ function LegalHome({ navigation }) {
         backgroundColor: "#00204C",
       }}
     >
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.text}
         onPress={() => navigation.navigate("متابعة الشئون القانونية")}
       >
         <Text style={styles.text}>متابعة موقف الشئون القانونية</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+
+      
       <TouchableOpacity
+        style={styles.text}
+        onPress={() => navigation.navigate("متابعة الشئون القانونية (واتساب)")}
+      >
+        <Text style={styles.text}>متابعة موقف الشئون القانونية (واتساب)</Text>
+      </TouchableOpacity>
+
+
+
+      {/* <TouchableOpacity
         style={styles.text}
         onPress={() => alert('جارى تجهيزها')}
       >
         <Text style={styles.text}>التوكيلات</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {/* <TouchableOpacity
         style={styles.text}
@@ -39,7 +50,7 @@ export default LegalHome;
 const styles = StyleSheet.create({
   text: {
     color: "white",
-    fontSize: 20,
+    fontSize: 16,
     backgroundColor: "#3355D4",
     borderRadius: 5,
     textAlign: "center",
