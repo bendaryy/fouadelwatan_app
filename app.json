@@ -2,7 +2,7 @@
   "expo": {
     "name": "Fouad El-Watan",
     "slug": "fouadelwatan",
-    "version": "1.0.9",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.bendary.fouadelwatan",
-      "buildNumber": "10"
+      "buildNumber": "11"
     },
     "android": {
       "package": "com.bendary.fouadelwatan",

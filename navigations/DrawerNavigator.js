@@ -13,6 +13,7 @@ import Einvoicesent from "../screens/Einvoice/Einvoicesent";
 import LegalSituation from "../screens/legal/LegalSituation";
 import LegalHome from "../screens/legal/LegalHome";
 import LegalTabs from "../screens/Tabs/LegalTabs";
+import ArchiveWard from "../screens/Tabs/ArchiveWard";
 // import WatanCompanies from "../screens/companies/WatanCompanies";
 
 const Drawer = createDrawerNavigator();
@@ -42,6 +43,11 @@ const DrawerNavigator = () => {
         options={{ headerTitle: "" }}
         name="الشئون القانونية"
         component={LegalTabs}
+      />
+      <Drawer.Screen
+        options={{ headerTitle: "الأرشيف الصادر والوارد" }}
+        name="الأرشيف الوارد و الصادر"
+        component={ArchiveWard}
       />
     </Drawer.Navigator>
   );

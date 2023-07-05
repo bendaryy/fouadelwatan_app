@@ -48,6 +48,13 @@ const Home = ({ navigation }) => {
         >
           <Text style={styles.text}>الشئون القانونية</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
+          title="الأرشيف الوارد و الصادر"
+          onPress={() => navigation.navigate("الأرشيف الوارد و الصادر")} // We added an onPress event which would navigate to the About screen
+        >
+          <Text style={styles.text}>الأرشيف الوارد و الصادر</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
