@@ -20,6 +20,14 @@ const Home = ({ navigation }) => {
         >
           <Text style={styles.text}>جميع الشركات</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
+          onPress={() => navigation.navigate("بيانات الشركات و العملاء و الموظفين")} // We added an onPress event which would navigate to the About screen
+        >
+          <Text style={styles.text}>بيانات الشـركات و العـملاء و الموظفين</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.TouchableOpacity}
           title="قسم الضرائب"
@@ -41,13 +49,7 @@ const Home = ({ navigation }) => {
         >
           <Text style={styles.text}>الفواتير الإلكترونية</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.TouchableOpacity}
-          title="الشئون القانونية"
-          onPress={() => navigation.navigate("الشئون القانونية")} // We added an onPress event which would navigate to the About screen
-        >
-          <Text style={styles.text}>الشئون القانونية</Text>
-        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.TouchableOpacity}
           title="الأرشيف الوارد و الصادر"
@@ -70,10 +72,11 @@ const styles = StyleSheet.create({
   },
   TouchableOpacity: {
     backgroundColor: "#3B71f2",
-    marginTop: 30,
+    // marginTop: 30,
+    marginBottom: 30,
     padding: 20,
     borderRadius: 10,
-    width: 200,
+    width: 250,
   },
   text: {
     textAlign: "center",

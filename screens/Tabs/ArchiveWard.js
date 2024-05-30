@@ -3,8 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // import { AllCompanies } from "./StackNavigator";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import LegalHome from "../legal/LegalHome";
-import Whatsapp from "../legal/Whatsapp";
 import ArchiveWardSadrScreen from "../Archive/ArchiveWardSadrScreen";
 import Ward from "../Archive/Ward";
 import Sadr from "../Archive/Sadr";

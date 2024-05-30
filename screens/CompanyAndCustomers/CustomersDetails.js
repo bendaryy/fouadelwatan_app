@@ -19,71 +19,19 @@ import {
   Cell,
 } from "react-native-table-component";
 
-const CompanyDetails = ({ route, navigation }) => {
+const CustomersDetails = ({ route, navigation }) => {
   const [isLoading, setLoading] = useState(false);
   const [search, setSearch] = useState();
 
-  const {
-    name,
-    archive,
-    companyId,
-    code,
-    TxtYear,
-    Kian,
-    AddrCo,
-    BetakaDriba,
-    FileDriba,
-    SegelTogary,
-    MamoriaDriba,
-    NameOner,
-    PhoneOner,
-    EmailDir,
-    EmailOner,
-    notee,
-  } = route.params;
+  const { person_name, company_name, phone1,phone2,email1,email2,position } = route.params;
 
-  const tableHead = [code, "كود الشركة"];
+  const tableHead = [person_name, "اسم الشخص"];
   const tableData = [
-    [name, "إسم الشركة"],
-    [
-      <Pressable
-        style={{ color: "white", textAlign: "center", backgroundColor: "blue" }}
-      >
-        <Text
-          onPress={
-            archive != null
-              ? () => Linking.openURL(archive)
-              : () => alert("لا يوجد أرشيف لهذه الشركة حالياً")
-          }
-          style={{
-            textAlign: "center",
-            color: "white",
-            margin: "auto",
-            alignContent: "center",
-            alignItems: "center",
-            marginLeft: 15,
-            padding: 30,
-          }}
-        >
-          {archive != null
-            ? "الذهاب إلى الأرشيف الإلكترونى "
-            : "لا يوجد ارشيف لهذه الشركة حالياً"}
-        </Text>
-      </Pressable>,
-      " الأرشيف الإلكترونى",
-    ],
+    [company_name, "إسم الشركة"],
+    [position, "الوظيفة"],
 
-    [TxtYear, "نشاط الشركة"],
-    [Kian, "كيان الشركة"],
-    [AddrCo, "عنوان الشركة"],
-    [BetakaDriba, "رقم البطاقة الضريبية"],
-    [FileDriba, "رقم الملف الضريبى"],
-    [SegelTogary, "رقم السجل التجارى"],
-    [MamoriaDriba, "المأمورية التابعة لها"],
-    [NameOner, "مالك الشركة"],
-    [PhoneOner, "المدير المالى"],
     [
-      <Pressable onPress={() => Linking.openURL(`tel:${EmailDir}`)}>
+      <Pressable onPress={() => Linking.openURL(`tel:${phone1}`)}>
         <Text
           style={{
             textAlign: "center",
@@ -96,18 +44,83 @@ const CompanyDetails = ({ route, navigation }) => {
             padding: 2,
           }}
         >
-          {EmailDir != null ? EmailDir : "لا يوجد"}
+          {phone1 != null ? phone1 : "لا يوجد"}
         </Text>
       </Pressable>,
 
-      "رقم المدير المالى",
+      "رقم الموبايل",
     ],
-    [EmailOner, "إيميل الشركة"],
+    [
+      <Pressable onPress={() => Linking.openURL(`tel:${phone2}`)}>
+        <Text
+          style={{
+            textAlign: "center",
+            fontSize: 20,
+            color: "white",
+            margin: "auto",
+            alignContent: "center",
+            alignItems: "center",
+            marginLeft: 15,
+            padding: 2,
+          }}
+        >
+          {phone2 != null ? phone2 : "لا يوجد"}
+        </Text>
+      </Pressable>,
+
+      "رقم الموبايل البديل",
+    ],
+    [
+      <Pressable onPress={() => Linking.openURL(`mailto:${email1}`)}>
+        <Text
+          style={{
+            textAlign: "center",
+            color: "white",
+            margin: "auto",
+            alignContent: "center",
+            alignItems: "center",
+            marginLeft: 15,
+            padding: 2,
+          }}
+        >
+          {email1 != null ? email1 : "لا يوجد"}
+        </Text>
+      </Pressable>,
+
+      "البريد الإلكــترونى",
+    ],
+    [
+      <Pressable onPress={() => Linking.openURL(`mailto:${email2}`)}>
+        <Text
+          style={{
+            textAlign: "center",
+            color: "white",
+            margin: "auto",
+            alignContent: "center",
+            alignItems: "center",
+            marginLeft: 15,
+            padding: 2,
+          }}
+        >
+          {email2 != null ? email2 : "لا يوجد"}
+        </Text>
+      </Pressable>,
+
+      "البريد الإلكــترونى البديل",
+    ],
+    // [Kian, "كيان الشركة"],
+    // [AddrCo, "عنوان الشركة"],
+    // [BetakaDriba, "رقم البطاقة الضريبية"],
+    // [FileDriba, "رقم الملف الضريبى"],
+    // [SegelTogary, "رقم السجل التجارى"],
+    // [MamoriaDriba, "المأمورية التابعة لها"],
+    // [NameOner, "مالك الشركة"],
+    // [PhoneOner, "المدير المالى"],
+    // [EmailOner, "إيميل الشركة"],
     // [notee, "ملاحظات"],
   ];
-  const notes = [[notee, "ملاحظات"]];
+  //   const notes = [[notee, "ملاحظات"]];
 
- 
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -132,7 +145,7 @@ const CompanyDetails = ({ route, navigation }) => {
               textStyle={styles.text}
             />
             {/* <Row data={notes} style={styles.head} textStyle={styles.text} /> */}
-            <Rows data={notes} style={styles.note} textStyle={styles.text} />
+            {/* <Rows data={notes} style={styles.note} textStyle={styles.text} /> */}
           </Table>
         </ScrollView>
       </View>
@@ -162,4 +175,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CompanyDetails;
+export default CustomersDetails;

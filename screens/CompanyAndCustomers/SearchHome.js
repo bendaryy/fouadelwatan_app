@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-function LegalHome({ navigation }) {
+function SearchHome({ navigation }) {
   return (
     <View
       style={{
@@ -18,15 +18,12 @@ function LegalHome({ navigation }) {
         <Text style={styles.text}>متابعة موقف الشئون القانونية</Text>
       </TouchableOpacity> */}
 
-      
       <TouchableOpacity
         style={styles.text}
-        onPress={() => navigation.navigate("متابعة الشئون القانونية (واتساب)")}
+        onPress={() => navigation.navigate("بحث فى بيانات الشركات")}
       >
-        <Text style={styles.text}>متابعة موقف الشئون القانونية (واتساب)</Text>
+        <Text style={styles.text}>بحث فى بيانات الشركات</Text>
       </TouchableOpacity>
-
-
 
       {/* <TouchableOpacity
         style={styles.text}
@@ -45,7 +42,7 @@ function LegalHome({ navigation }) {
   );
 }
 
-export default LegalHome;
+export default SearchHome;
 
 const styles = StyleSheet.create({
   text: {

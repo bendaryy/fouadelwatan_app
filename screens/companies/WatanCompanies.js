@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
+import { SearchBar } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 import {
   Text,
   View,
@@ -59,10 +61,11 @@ function WatanCompanies({ navigation }) {
     if (text) {
       const newData = masterData.filter((item) => {
         const itemData = item.name ? item.name : "";
-        const itemCode = item.code ? item.code : "";
+        // const itemCode = item.code ? item.code : "";
         const textData = text;
         return (
-          itemData.indexOf(textData) > -1 || itemCode.indexOf(textData) > -1
+          itemData.indexOf(textData) > -1 
+          // itemData.indexOf(textData) > -1 || itemCode.indexOf(textData) > -1
         );
       });
       setFilterData(newData);
@@ -98,10 +101,41 @@ function WatanCompanies({ navigation }) {
         <View style={styles.ViewStatus}>
           <Text style={styles.textStatus}> عدد الشركات : {number}</Text>
         </View>
-        <TextInput
+        {/* <TextInput
           style={styles.TextInput}
           value={search}
-          placeholder="البحث بإسم الشركة او كود الشركة"
+          placeholder="البحث بإسم الشركة"
+          onChangeText={(text) => searchFilter(text)}
+        /> */}
+
+        <SearchBar
+          containerStyle={{
+            backgroundColor: "transparent",
+            borderBottomColor: "transparent",
+            borderTopColor: "transparent",
+            margin: 2,
+          }}
+          inputContainerStyle={{
+            backgroundColor: "#e0e0e0",
+            borderRadius: 20,
+            // height: 50,
+            flexDirection: "row",
+            alignItems: "center",
+            // padding: 10,
+            // margin: 5,
+          }}
+          inputStyle={{
+            color: "#333",
+            fontSize: 18,
+            textAlign: "right",
+            marginRight: 10,
+          }}
+          // searchIcon={() => (
+          //   <Icon name="search" size={22} color="#333" />
+          // )}
+          clearIcon={{ color: "#333", name: "close", size: 25 }}
+          value={search}
+          placeholder="البحث بإسم الشركة"
           onChangeText={(text) => searchFilter(text)}
         />
         <FlatList
@@ -126,6 +160,8 @@ function WatanCompanies({ navigation }) {
                   NameOner: item.NameOner,
                   PhoneOner: item.PhoneOner,
                   EmailOner: item.EmailOner,
+                  EmailDir: item.EmailDir,
+                  FileDriba: item.FileDriba,
                   notee: item.notee,
                 });
               }}

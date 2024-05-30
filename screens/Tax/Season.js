@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -9,8 +9,8 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+
 function Season({ navigation }) {
-  
   const DATA = [
     {
       id: 1,
@@ -22,61 +22,84 @@ function Season({ navigation }) {
     },
   ];
 
+  const [seasonInput, setSeasonInput] = useState("");
 
-  // const [season, setSeason] = React.useState(2022);
-  // return (
-  //   <View
-  //     style={{
-  //       flex: 1,
-  //       alignItems: "center",
-  //       justifyContent: "center",
-  //       backgroundColor: "#00204C",
-  //     }}
-  //   >
-  //     <TouchableOpacity
-  //       style={styles.text}
-  //       // onPress={() => navigation.navigate("الإقرارات")}
-  //       onPress={() => navigation.navigate("الإقرارات",{season})}
-  //     >
-  //       <Text style={styles.text}>{season}</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
-   return (
-     <SafeAreaView
-       style={{
-         flex: 1,
-         alignItems: "center",
-         justifyContent: "center",
-         backgroundColor: "#00204C",
-       }}
-     >
-       <FlatList
-         data={DATA}
-         keyExtractor={(item) => item.id}
-         renderItem={({ item }) => (
-           <TouchableOpacity
-             onPress={() => {
-               navigation.navigate("الإقرارات", {
-                 season: item.season,
-               });
-             }}
-             style={styles.text}
-           >
-             <Text style={styles.text2}>{item.season}</Text>
-           </TouchableOpacity>
-         )}
-       />
-       <StatusBar style="auto" />
-     </SafeAreaView>
-   );
-
-
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* <FlatList
+        data={DATA}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("الإقرارات", {
+                season: item.season,
+              });
+            }}
+            style={styles.text}
+          >
+            <Text style={styles.text2}>{item.season}</Text>
+          </TouchableOpacity>
+        )}
+      /> */}
+      <TextInput
+        style={styles.input}
+        placeholder="Enter season"
+        placeholderTextColor="#aaa"
+        keyboardType="numeric"
+        value={seasonInput}
+        onChangeText={setSeasonInput}
+      />
+      <TouchableOpacity
+        style={styles.navigateButton}
+        onPress={() => {
+          if (seasonInput) {
+            navigation.navigate("الإقرارات", {
+              season: parseInt(seasonInput),
+            });
+          }
+        }}
+      >
+        <Text style={styles.navigateButtonText}>التالى</Text>
+      </TouchableOpacity>
+      <StatusBar style="auto" />
+    </SafeAreaView>
+  );
 }
 
 export default Season;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#00204C",
+  },
+  input: {
+    height: 50,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    color: "white",
+    marginVertical: 10,
+    width: "80%",
+    backgroundColor: "#3355D4",
+    textAlign: "center",
+    fontSize: 16,
+  },
+  navigateButton: {
+    backgroundColor: "#3355D4",
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 10,
+    alignItems: "center",
+  },
+  navigateButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
   text: {
     color: "white",
     fontSize: 20,
@@ -94,4 +117,3 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 });
-

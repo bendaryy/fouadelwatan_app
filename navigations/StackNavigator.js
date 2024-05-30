@@ -24,8 +24,11 @@ import AuditFilesMonth from "../screens/Audit/AuditFilesMonth";
 import AuditFileStatus from "../screens/Audit/AuditFilesStatus";
 import AuditFileNew from "../screens/Audit/AuditFilesNew";
 import Einvoicesent from "../screens/Einvoice/Einvoicesent";
-import LegalSituation from "../screens/legal/LegalSituation";
-import LegalHome from "../screens/legal/LegalHome";
+import LegalHome from "../screens/CompanyAndCustomers/SearchHome";
+import SearchDataInCompanies from "../screens/CompanyAndCustomers/SearchDataInCompanies";
+import CustomersDetails from "../screens/CompanyAndCustomers/CustomersDetails";
+import Customers from "../screens/CompanyAndCustomers/Customers";
+import EmployeesDetails from "../screens/CompanyAndCustomers/EmployeesDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -76,9 +79,32 @@ const AllCompanies = () => {
     <Stack.Navigator screenOptions={screenOptionStyle2}>
       <Stack.Screen name="عرض جميع الشركات" component={WatanCompanies} />
       <Stack.Screen name="companyDetails" component={CompanyDetails} />
+      <Stack.Screen
+        name="SearchDataInCompanies"
+        component={SearchDataInCompanies}
+      />
     </Stack.Navigator>
   );
 };
+
+const SearchCompaniesAndCustomers = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle2}>
+      <Stack.Screen name="SearchInCompany" component={SearchDataInCompanies} />
+      <Stack.Screen name="Customers" component={Customers} />
+      <Stack.Screen name="companyDetails" component={CompanyDetails} />
+      <Stack.Screen name="CustomersDetails" component={CustomersDetails} />
+      <Stack.Screen name="EmployeesDetails" component={EmployeesDetails} />
+    </Stack.Navigator>
+  );
+};
+
+// const SearchInCustomers = () => {
+//   <Stack.Navigator screenOptions={screenOptionStyle2}>
+//     <Stack.Screen name="Customers" component={Customers} />
+//     <Stack.Screen name="CustomersDetails" component={CustomersDetails} />
+//   </Stack.Navigator>;
+// };
 
 const Tax = () => {
   return (
@@ -105,7 +131,6 @@ const Audit = () => {
       <Stack.Screen name="عرض تفصيلى للميزانية" component={MezanyaDetails} />
       <Stack.Screen name="الميزانيات" component={Mezanyat} />
 
-
       <Stack.Screen name="إختر حالة ملف المراجعة" component={AuditFileStatus} />
       <Stack.Screen name="ملفات المراجعة" component={AuditFileNew} />
     </Stack.Navigator>
@@ -120,11 +145,10 @@ const AuditFiles = () => {
 };
 
 const Einvoice = () => {
-   <Stack.Navigator screenOptions={screenOptionStyle}>
-     <Stack.Screen name="الفواتير الإلكترونية" component={Einvoicesent} />
-   </Stack.Navigator>;
-}
-
+  <Stack.Navigator screenOptions={screenOptionStyle}>
+    <Stack.Screen name="الفواتير الإلكترونية" component={Einvoicesent} />
+  </Stack.Navigator>;
+};
 
 export {
   MainStackNavigator,
@@ -134,4 +158,6 @@ export {
   Audit,
   AuditFiles,
   Einvoice,
+  SearchCompaniesAndCustomers,
+  // SearchInCustomers,
 };

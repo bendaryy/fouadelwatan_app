@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -9,56 +9,73 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+
 function MezanyatSeason({ route, navigation }) {
   const { type } = route.params;
-  const DATA = [
-    {
-      id: 1,
-      season: 2021,
-    },
-    {
-      id: 2,
-      season: 2022,
-    },
-    {
-      id: 2,
-      season: 2023,
-    },
-  ];
+  const [seasonInput, setSeasonInput] = useState("");
+
   return (
-    <SafeAreaView  style={{
+    <SafeAreaView
+      style={{
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#00204C",
-      }}>
-      <FlatList
-        data={DATA}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("إختر شهر الميزانية", {
-                season: item.season,
-                type
-              });
-            }}
-            style={styles.text}
-          >
-            <Text style={styles.text2}>{item.season}</Text>
-          </TouchableOpacity>
-        )}
+      }}
+    >
+      <Text style={{ color: "white" }}> سنة الميزانية</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="برجاء كتابة سنة الميزانية"
+        placeholderTextColor="#ccc"
+        keyboardType="numeric"
+        value={seasonInput}
+        onChangeText={setSeasonInput}
       />
+      <TouchableOpacity
+        style={styles.navigateButton}
+        onPress={() => {
+          if (seasonInput) {
+            navigation.navigate("إختر شهر الميزانية", {
+              season: parseInt(seasonInput),
+              type,
+            });
+          }
+        }}
+      >
+        <Text style={styles.navigateButtonText}>التالى</Text>
+      </TouchableOpacity>
       <StatusBar style="auto" />
     </SafeAreaView>
-
-    
   );
 }
 
 export default MezanyatSeason;
 
 const styles = StyleSheet.create({
+  input: {
+    height: 50,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    color: "white",
+    marginVertical: 10,
+    width: "80%",
+    backgroundColor: "#3355D4",
+    textAlign: "center",
+    fontSize: 16,
+  },
+  navigateButton: {
+    backgroundColor: "#3355D4",
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  navigateButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
   text: {
     color: "white",
     fontSize: 20,

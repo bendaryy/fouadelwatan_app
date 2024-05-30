@@ -10,10 +10,10 @@ import TabNavigator from "./TabNavigator";
 import TaxTabs from "../screens/Tabs/Tax";
 import AuditTabs from "../screens/Tabs/Audit";
 import Einvoicesent from "../screens/Einvoice/Einvoicesent";
-import LegalSituation from "../screens/legal/LegalSituation";
-import LegalHome from "../screens/legal/LegalHome";
-import LegalTabs from "../screens/Tabs/LegalTabs";
 import ArchiveWard from "../screens/Tabs/ArchiveWard";
+import SearchHome from "../screens/CompanyAndCustomers/SearchHome";
+import { SearchCompaniesAndCustomers } from "./StackNavigator";
+import SearchData from "../screens/Tabs/SearchData";
 // import WatanCompanies from "../screens/companies/WatanCompanies";
 
 const Drawer = createDrawerNavigator();
@@ -23,12 +23,17 @@ const DrawerNavigator = () => {
     <Drawer.Navigator>
       <Drawer.Screen name="الصفحة الرئيسية" component={TabNavigator} />
 
+      <Drawer.Screen name="عرض جميع الشركات" component={CompaniesTabs} />
+      <Drawer.Screen
+        options={{ headerTitle: "" }}
+        name="بيانات الشركات و العملاء و الموظفين"
+        component={SearchData}
+      />
       <Drawer.Screen
         name="قسم الضرائب"
         component={TaxTabs}
         options={{ headerTitle: "" }}
       />
-      <Drawer.Screen name="عرض جميع الشركات" component={CompaniesTabs} />
       <Drawer.Screen
         options={{ headerTitle: "" }}
         name="قسم المراجعة"
@@ -38,11 +43,6 @@ const DrawerNavigator = () => {
         options={{ headerTitle: "" }}
         name="الفواتير الإلكترونية"
         component={Einvoicesent}
-      />
-      <Drawer.Screen
-        options={{ headerTitle: "" }}
-        name="الشئون القانونية"
-        component={LegalTabs}
       />
       <Drawer.Screen
         options={{ headerTitle: "الأرشيف الصادر والوارد" }}
