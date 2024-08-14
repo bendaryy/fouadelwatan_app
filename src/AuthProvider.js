@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         setUser,
         error,
         login: (email, password) => {
-         axios.defaults.headers.common["AppKey"] = "31fdhg2334xzewrgfhfdjhrg";
+          axios.defaults.headers.common["AppKey"] = "31fdhg2334xzewrgfhfdjhrg";
           axios
             .post("/api/login", {
               email,
@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
                 profile_photo: response.data.user.profile_photo_url,
                 token: response.data.token,
                 name: response.data.user.name,
+                section_id: response.data.user.section_id,
               };
               console.log(userResponse);
               setUser(userResponse);

@@ -26,7 +26,6 @@ function WatanCompanies({ navigation }) {
   const [search, setSearch] = useState();
   const [number, setNumber] = useState();
 
-
   useEffect(() => {
     let unmounted = false;
     fetchPosts();
@@ -55,8 +54,6 @@ function WatanCompanies({ navigation }) {
       });
   };
 
- 
-
   const searchFilter = (text) => {
     if (text) {
       const newData = masterData.filter((item) => {
@@ -64,7 +61,7 @@ function WatanCompanies({ navigation }) {
         // const itemCode = item.code ? item.code : "";
         const textData = text;
         return (
-          itemData.indexOf(textData) > -1 
+          itemData.indexOf(textData) > -1
           // itemData.indexOf(textData) > -1 || itemCode.indexOf(textData) > -1
         );
       });

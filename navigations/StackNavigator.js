@@ -29,6 +29,7 @@ import SearchDataInCompanies from "../screens/CompanyAndCustomers/SearchDataInCo
 import CustomersDetails from "../screens/CompanyAndCustomers/CustomersDetails";
 import Customers from "../screens/CompanyAndCustomers/Customers";
 import EmployeesDetails from "../screens/CompanyAndCustomers/EmployeesDetails";
+import legalProcedures from "../screens/legal/LegalProcedures";
 
 const Stack = createNativeStackNavigator();
 
@@ -150,6 +151,12 @@ const Einvoice = () => {
   </Stack.Navigator>;
 };
 
+const Legal = () => {
+  <Stack.Navigator screenOptions={screenOptionStyle}>
+    <Stack.Screen name="إجراءات الشئون القانونية" component={legalProcedures} />
+  </Stack.Navigator>;
+};
+
 export {
   MainStackNavigator,
   ContactStackNavigator,
@@ -157,6 +164,7 @@ export {
   Tax,
   Audit,
   AuditFiles,
+  Legal,
   Einvoice,
   SearchCompaniesAndCustomers,
   // SearchInCustomers,
